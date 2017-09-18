@@ -25,7 +25,7 @@ Self-installing linux-vm with vagrant and self-configuration with ansible.
 
 ```shell
     $ vagrant up
-    ```
+```
 
 
 
