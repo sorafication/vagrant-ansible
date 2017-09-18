@@ -23,7 +23,10 @@ Self-installing linux-vm with vagrant and self-configuration with ansible.
 
 #### Start your VM
 
-use "vagrant up"
+```shell
+    $ vagrant up
+    ```
+
 
 
 Information: This Repo is currently only configured for my own workspace. There is my Public-Key, my preferred configuration for zsh,vim,git etc and so on.
