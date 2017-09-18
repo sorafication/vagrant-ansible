@@ -1,0 +1,46 @@
+---
+- name: Set the hostname in /etc/hostname
+  shell: echo {{ vagrant_local.vm.hostname }} > /etc/hostname
+  when: vagrant_local.vm.hostname is defined
+
+- name: Set the hostname
+  shell: hostname {{ vagrant_local.vm.hostname }}
+  when: vagrant_local.vm.hostname is defined
+
+- name: Add Own SSH Public Key
+  authorized_key:
+    user: vagrant
+    state: present
+    key: "{{ lookup('file', '/home/vagrant/vagrant-desktop/ansible/files/id_rsa.pub') }}"
+
+- name: Check if SSH Key for Github already exists
+  stat: path=/home/vagrant/.ssh/id_rsa
+  register: ssh_key
+
+- name: Create SSH Key for Github
+  user:
+    name: vagrant
+    generate_ssh_key: yes
+    ssh_key_bits: 2048
+    ssh_key_file: .ssh/id_rsa
+  when: ssh_key.stat.exists == False
+
+- name: Update /etc/hosts
+  lineinfile: dest=/etc/hosts regexp='^127\.0\.0\.1' line='127.0.0.1 localhost {{ vagrant_local.vm.hostname }}' owner=root group=root mode=0644
+
+- name: Update apt
+  apt: update_cache=yes
+
+- name: Install System Packages
+  package: name={{ item }} state=latest
+  with_items:
+    - curl
+    - wget
+    - vim
+    - htop
+    - git
+    - mc
+    - rsync
+    - zsh
+
+

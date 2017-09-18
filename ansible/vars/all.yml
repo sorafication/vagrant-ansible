@@ -1,0 +1,9 @@
+---
+server:
+    install: '1'
+    timezone: Europe/Berlin
+    locale: de_DE.UTF-8
+vagrant_local:
+    install: '1'
+    vm: { base_box: stretch64, hostname: Sora, ip: 192.168.0.88, memory: '2096' }
+

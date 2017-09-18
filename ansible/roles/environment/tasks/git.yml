@@ -1,0 +1,6 @@
+---
+- name: Copy Git Config 
+  template:
+    src: templates/gitconfig
+    dest: "/home/vagrant/.gitconfig"
+    owner: vagrant

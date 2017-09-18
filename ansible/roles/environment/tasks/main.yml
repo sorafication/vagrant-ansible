@@ -1,0 +1,8 @@
+---
+- name: Include Git Config
+  include: git.yml
+  tags: Deploy
+
+- name: Include ZSH Config
+  include: zsh.yml
+  tags: Deploy

@@ -1,0 +1,27 @@
+---
+
+- name: Set zsh as default shell
+  user: name=vagrant shell=/usr/bin/zsh
+
+- name: Copy Dircolors settings
+  template:
+    src: templates/dircolors
+    dest: "/home/vagrant/.dircolors"
+    owner: vagrant
+
+- name: Check if Git-prompt already exists
+  stat: path=/home/vagrant/git-prompt/zshrc.sh
+  register: git_prompt
+
+- name: Clone git-prompt Repo
+  become_user: vagrant
+  git:
+    repo: https://github.com/olivierverdier/zsh-git-prompt
+    dest: "/home/vagrant/git-prompt"
+  when: git_prompt.stat.exists == False
+
+- name: Copy zsh Config 
+  template:
+    src: templates/zshrc
+    dest: "/home/vagrant/.zshrc"
+    owner: vagrant
