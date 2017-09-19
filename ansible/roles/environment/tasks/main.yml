@@ -1,8 +1,8 @@
 ---
 - name: Include Git Config
-  include: git.yml
+  include_tasks: git.yml
   tags: Deploy
 
 - name: Include ZSH Config
-  include: zsh.yml
+  include_tasks: zsh.yml
   tags: Deploy
