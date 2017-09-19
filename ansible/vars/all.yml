@@ -1,9 +1,14 @@
 ---
-server:
-    install: '1'
-    timezone: Europe/Berlin
-    locale: de_DE.UTF-8
-vagrant_local:
-    install: '1'
-    vm: { base_box: stretch64, hostname: Sora, ip: 192.168.0.88, memory: '2096' }
+# Enter Your Variables for your workspace
+vagrant_hostname: Sora
+public_ssh_key: https://github.com/wieczoreko.keys
 
+vagrant_packages:
+- curl
+- wget
+- vim
+- htop
+- git
+- mc
+- rsync
+- zsh

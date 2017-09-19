@@ -1,17 +1,21 @@
 ---
 - name: Set the hostname in /etc/hostname
-  shell: echo {{ vagrant_local.vm.hostname }} > /etc/hostname
-  when: vagrant_local.vm.hostname is defined
+  shell: echo {{ vagrant_hostname }} > /etc/hostname
+  when: vagrant_hostname is defined
 
 - name: Set the hostname
-  shell: hostname {{ vagrant_local.vm.hostname }}
-  when: vagrant_local.vm.hostname is defined
+  shell: hostname {{ vagrant_hostname }}
+  when: vagrant_hostname is defined
+
+- name: Update /etc/hosts
+  lineinfile: dest=/etc/hosts regexp='^127\.0\.0\.1' line='127.0.0.1 localhost {{ vagrant_hostname }}' owner=root group=root mode=0644
 
 - name: Add Own SSH Public Key
   authorized_key:
     user: vagrant
     state: present
-    key: "{{ lookup('file', '/home/vagrant/vagrant-desktop/ansible/files/id_rsa.pub') }}"
+    key: "{{ public_ssh_key }}"
+  when: "{{ public_ssh_key }}" is defined
 
 - name: Check if SSH Key for Github already exists
   stat: path=/home/vagrant/.ssh/id_rsa
@@ -25,22 +29,12 @@
     ssh_key_file: .ssh/id_rsa
   when: ssh_key.stat.exists == False
 
-- name: Update /etc/hosts
-  lineinfile: dest=/etc/hosts regexp='^127\.0\.0\.1' line='127.0.0.1 localhost {{ vagrant_local.vm.hostname }}' owner=root group=root mode=0644
-
 - name: Update apt
   apt: update_cache=yes
 
 - name: Install System Packages
   package: name={{ item }} state=latest
-  with_items:
-    - curl
-    - wget
-    - vim
-    - htop
-    - git
-    - mc
-    - rsync
-    - zsh
+  with_items: "{{ vagrant_packages }}"
+
 
 
