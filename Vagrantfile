@@ -40,7 +40,7 @@ Vagrant.configure("2") do |config|
   	export PYTHONUNBUFFERED=1
 	
         # Download the Ansible Config files from your Repo 
-        git clone git@github.com:wieczoreko/vagrant-ansible.git /home/vagrant
+        git clone git@github.com:wieczoreko/vagrant-ansible.git /home/vagrant/vagrant-ansible
 
   	# Run the actual playbook:
   	ansible-playbook /home/vagrant/ansible/playbook.yml
