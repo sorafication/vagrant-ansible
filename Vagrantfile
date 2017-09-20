@@ -1,3 +1,6 @@
+
+source_git_repository="github.com:wieczoreko/vagrant-ansible.git"
+
 Vagrant.configure("2") do |config|
 
     config.vm.provider :virtualbox do |v|
@@ -38,13 +41,12 @@ Vagrant.configure("2") do |config|
   	# We want Ansible's output line by line:
   	export PYTHONUNBUFFERED=1
 	
-        ### Download your Repository to the Mashine. Cloning via https initally is needed because Cloning via SSH is not possible without a key.
-        ### This will be directly changed 
-        sudo su - vagrant -c 'git clone https://github.com/wieczoreko/vagrant-ansible.git /home/vagrant/vagrant-ansible'
-		sudo su - vagrant -c 'cd /home/vagrant/vagrant-ansible && git remote set-url origin git@github.com:wieczoreko/vagrant-ansible.git'
+        # Download the Ansible Config files from your Repo
+        sudo su - vagrant -c 'git clone https://"#{source_git_repository}" /home/vagrant/vagrant-ansible'
+		sudo su - vagrant -c 'cd /home/vagrant/vagrant-ansible && git remote set-url origin git@"#{source_git_repository}"'
 		
   	# Run the actual playbook:
-  	ansible-playbook /home/vagrant/vagrant-ansible/ansible/playbook.yml
+  	ansible-playbook /home/vagrant/vagrant-ansible/ansible/playbook.yml --skip-tags "UpdateGit"
 	#Display the Public Key to add it in Github
 	echo "SSH PUBLIC KEY"
 	cat /home/vagrant/.ssh/id_rsa.pub
