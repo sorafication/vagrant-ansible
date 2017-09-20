@@ -3,7 +3,7 @@
   become_user: vagrant
   git:
     repo: "{{ config_repo_url }}"
-    dest: /home/vagrant/
+    dest: /home/vagrant/vagrant-ansible
   tags: Deploy 
 
 - name: Include Git Config
