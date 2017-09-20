@@ -13,3 +13,7 @@
 - name: Include ZSH Config
   include_tasks: zsh.yml
   tags: Deploy
+
+- name: Include Vim Config
+  include_tasks: vim.yml
+  tags: Deploy

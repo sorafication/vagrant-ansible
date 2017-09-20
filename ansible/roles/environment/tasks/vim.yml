@@ -1,0 +1,7 @@
+---
+- name: Copy Vim Config 
+  template:
+    src: templates/vimrc
+    dest: "/home/vagrant/.vimrc"
+    owner: vagrant
+
