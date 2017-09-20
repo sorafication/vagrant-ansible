@@ -16,12 +16,9 @@ Vagrant.configure("2") do |config|
     config.vm.network    "private_network", ip: "192.168.0.88"
 	config.vm.network    "forwarded_port", guest: 8000, host: 8000
     config.ssh.forward_agent = true
-    config.vm.synced_folder ".", "/home/vagrant", create: true
+    config.vm.synced_folder ".", "/vagrant", create: true
 	config.vm.synced_folder "~", "/home/vagrant/host-home", create: true
 	
-	
-   # Will need to try synced folder, currently using above version
-    #config.vm.synced_folder "./", "/vagrant",
 	
 	# Deploy ansible on Machine and Deploy playbook
 	  $script = <<SCRIPT
@@ -43,7 +40,7 @@ Vagrant.configure("2") do |config|
   	export PYTHONUNBUFFERED=1
 	
         # Download the Ansible Config files from your Repo 
-        git clone https://github.com/wieczoreko/vagrant-ansible /home/vagrant
+        git clone git@github.com:wieczoreko/vagrant-ansible.git /home/vagrant
 
   	# Run the actual playbook:
   	ansible-playbook /home/vagrant/ansible/playbook.yml
