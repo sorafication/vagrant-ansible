@@ -32,7 +32,6 @@ export EDITOR=vim
 #source ${ZDOTDIR:-$HOME}/git-prompt/zshrc.sh
 # an example prompt
 
-PROMPT='%B%m%~%b$(git_branch) %# '
 
 #Add Function to see current git branch
 git_branch () {
@@ -42,3 +41,7 @@ branch_name=`git symbolic-ref --quiet --short HEAD 2> /dev/null`
         echo " %F{magenta}$branch_name%f "
     fi
 }
+
+setopt PROMPT_SUBST
+
+PROMPT='%B%m%~%b$(git_branch) %# '
