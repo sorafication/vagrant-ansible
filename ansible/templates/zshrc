@@ -4,7 +4,6 @@
 autoload compinit && compinit
 zstyle ':completion:*' menu select
 #zstyle ':completion:*' list-colors ''
-RPROMPT="[%T]"
 
 alias ls="ls --color"
 alias ll="ls -la"
@@ -29,9 +28,6 @@ export EDITOR=vim
 
 [ -e ~/.dircolors ] && eval $(dircolors -b ~/.dircolors) || eval $(dircolors -b)
 
-#source ${ZDOTDIR:-$HOME}/git-prompt/zshrc.sh
-# an example prompt
-
 
 #Add Function to see current git branch
 git_branch () {
@@ -43,5 +39,5 @@ branch_name=`git symbolic-ref --quiet --short HEAD 2> /dev/null`
 }
 
 setopt PROMPT_SUBST
-
-PROMPT='%B%m%~%b$(git_branch) %# '
+PS1='%F{yellow}%m%f~%F{blue}%1~%f$(git_branch)%#'
+RPROMPT="[%T]"
