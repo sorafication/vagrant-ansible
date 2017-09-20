@@ -1,4 +1,11 @@
 ---
+- name: Download up-to-date Configuration Files
+  become_user: vagrant
+  git:
+    repo: "{{ config_repo_url }}"
+    dest: /home/vagrant/
+  tags: Deploy 
+
 - name: Include Git Config
   include_tasks: git.yml
   tags: Deploy
