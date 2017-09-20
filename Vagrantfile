@@ -16,7 +16,7 @@ Vagrant.configure("2") do |config|
     config.vm.network    "private_network", ip: "192.168.0.88"
 	config.vm.network    "forwarded_port", guest: 8000, host: 8000
     config.ssh.forward_agent = true
-    config.vm.synced_folder ".", "/home/vagrant/vagrant-desktop", create: true
+    config.vm.synced_folder ".", "/home/vagrant", create: true
 	config.vm.synced_folder "~", "/home/vagrant/host-home", create: true
 	
 	
@@ -30,6 +30,7 @@ Vagrant.configure("2") do |config|
   		 temp /etc/apt/sources.list
 		sudo apt-get update
 		sudo apt-get install -y software-properties-common
+                sudo apt-get install -y git
 		sudo apt-get install -y python-pip
 		sudo pip install ansible
 		# Create a simple inventory file for localhost:
@@ -41,8 +42,11 @@ Vagrant.configure("2") do |config|
   	# We want Ansible's output line by line:
   	export PYTHONUNBUFFERED=1
 	
+        # Download the Ansible Config files from your Repo 
+        git clone https://github.com/wieczoreko/vagrant-ansible /home/vagrant
+
   	# Run the actual playbook:
-  	ansible-playbook /home/vagrant/vagrant-desktop/ansible/playbook.yml
+  	ansible-playbook /home/vagrant/ansible/playbook.yml
 	#Display the Public Key to add it in Github
 	echo "SSH PUBLIC KEY"
 	cat /home/vagrant/.ssh/id_rsa.pub
