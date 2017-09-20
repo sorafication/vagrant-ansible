@@ -18,8 +18,8 @@ alias cdgit="cd /home/vagrant/host-home/Documents/GitHub/"
 alias wow="git status"
 alias much="git"
 
-alias deploy="ansible-playbook /home/vagrant/vagrant-desktop/ansible/playbook.yml --tags Deploy"
-alias deployall="ansible-playbook /home/vagrant/vagrant-desktop/ansible/playbook.yml"
+alias deploy="ansible-playbook /home/vagrant/vagrant-ansible/ansible/playbook.yml --tags UpdateGit,Deploy"
+alias deployall="ansible-playbook /home/vagrant/vagrant-ansible/ansible/playbook.yml"
 
 
 # add local bin to path
@@ -29,8 +29,16 @@ export EDITOR=vim
 
 [ -e ~/.dircolors ] && eval $(dircolors -b ~/.dircolors) || eval $(dircolors -b)
 
-source ${ZDOTDIR:-$HOME}/git-prompt/zshrc.sh
+#source ${ZDOTDIR:-$HOME}/git-prompt/zshrc.sh
 # an example prompt
-PROMPT='%B%m%~%b$(git_super_status) %# '
 
+PROMPT='%B%m%~%b$(git_branch) %# '
 
+#Add Function to see current git branch
+git_branch () {
+branch_name=`git symbolic-ref --quiet --short HEAD 2> /dev/null`
+    if [ $? -eq 0 ]
+    then
+        echo " %F{magenta}$branch_name%f "
+    fi
+}
