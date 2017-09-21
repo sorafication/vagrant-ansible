@@ -1,13 +1,12 @@
-#aliases
-
 # fancy completion
 autoload compinit && compinit
 zstyle ':completion:*' menu select
 #zstyle ':completion:*' list-colors ''
 
+
+##aliases
 alias ls="ls --color"
 alias ll="ls -la"
-
 
 alias ..="cd .."
 alias ...="cd ../.."
@@ -21,15 +20,17 @@ alias deploy="ansible-playbook /home/vagrant/vagrant-ansible/ansible/playbook.ym
 alias deployall="ansible-playbook /home/vagrant/vagrant-ansible/ansible/playbook.yml"
 
 
-# add local bin to path
+## add local bin to path
 export PATH=~/bin:$PATH
-# export vim as editor
+
+## export vim as editor
 export EDITOR=vim
 
+##Use Different Colors for Directory
 [ -e ~/.dircolors ] && eval $(dircolors -b ~/.dircolors) || eval $(dircolors -b)
 
 
-#Add Function to see current git branch
+##Add Function to see current git branch
 git_branch () {
 branch_name=`git symbolic-ref --quiet --short HEAD 2> /dev/null`
     if [ $? -eq 0 ]
@@ -38,6 +39,12 @@ branch_name=`git symbolic-ref --quiet --short HEAD 2> /dev/null`
     fi
 }
 
+
+##set this to get the git_branch function working
 setopt PROMPT_SUBST
-PS1='%F{yellow}%m%f~%F{blue}%1~%f$(git_branch)%#'
+
+##Show Time on right side
 RPROMPT="[%T]"
+
+##Left Prompt Customization
+PS1='[%F{yellow}%m%f:%F{blue}%1~%f]$(git_branch)%# '
