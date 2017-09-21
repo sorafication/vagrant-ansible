@@ -4,6 +4,7 @@
   register: pathogen
 
 - name: Install pathogen"
+  become_user: vagrant
   git:
     repo: "https://github.com/tpope/vim-pathogen"
     version: master
@@ -12,6 +13,7 @@
   when: pathogen.stat.exists == False
 
 - name: "Install plugins"
+  become_user: vagrant
   git:
     repo: "{{ item.repo }}"
     version: "{{ item.version | default('master') }}"
