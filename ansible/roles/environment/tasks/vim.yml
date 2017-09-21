@@ -1,6 +1,6 @@
 ---
 - name: Check if pathogen is installed
-  stat: path={{ vagrant_home }}.vim
+  stat: path={{ vagrant_home }}/.vim
   register: pathogen
 
 - name: Install pathogen"
