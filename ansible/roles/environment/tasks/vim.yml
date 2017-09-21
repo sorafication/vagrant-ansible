@@ -26,8 +26,7 @@
     owner: vagrant
 
 - name: "Infect .vimrc"
- 15   become_user: vagrant
- 16   lineinfile:
- 17     line: "execute pathogen#infect()"
- 18     dest: "{{ vagrant_home }}/.vimrc"
+  lineinfile:
+    line: "execute pathogen#infect()"
+    dest: "{{ vagrant_home }}/.vimrc"
 
