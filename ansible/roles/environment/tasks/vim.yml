@@ -1,16 +1,15 @@
 ---
+- name: Check if pathogen is installed
+  stat: path={{ vagrant_home }}.vim
+  register: pathogen
+
 - name: Install pathogen"
   git:
     repo: "https://github.com/tpope/vim-pathogen"
     version: master
     depth: 1
     dest: "{{ vagrant_home }}/.vim"
-
-- name: "Infect .vimrc"
-  become_user: vagrant
-  lineinfile:
-    line: "execute pathogen#infect()"
-    dest: "{{ vagrant_home }}/.vimrc"
+  when: pathogen.stat.exists == False
 
 - name: "Install plugins"
   git:
@@ -20,10 +19,15 @@
     depth: 1
   with_items: "{{ pathogen_plugins }}"
 
-
 - name: Copy Vim Config 
   template:
     src: templates/vimrc
     dest: "/home/vagrant/.vimrc"
     owner: vagrant
+
+- name: "Infect .vimrc"
+ 15   become_user: vagrant
+ 16   lineinfile:
+ 17     line: "execute pathogen#infect()"
+ 18     dest: "{{ vagrant_home }}/.vimrc"
 
