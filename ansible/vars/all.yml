@@ -18,3 +18,5 @@ vagrant_packages:
 pathogen_plugins:
   - repo: "https://github.com/ajh17/VimCompletesMe.git"
   - repo: "https://github.com/pearofducks/ansible-vim.git"
+  - repo: "https://github.com/scrooloose/nerdtree.git"
+  - repo: "git://github.com/jiangmiao/auto-pairs.git"
