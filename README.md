@@ -1,5 +1,6 @@
 # vagrant-ansible
 With this Repo you create a debian VM, install ansible and configure the vm with ansible.
+You only need to have the Vagrantfile downloaded and it will itself download all the Ansible Config files from Github.
 
 
 Self-installing linux-vm with vagrant and self-configuration with ansible.
@@ -16,18 +17,14 @@ Self-installing linux-vm with vagrant and self-configuration with ansible.
     $ vagrant plugin install vagrant-hosts
     ```
     
-### Copy Files
+### Configuration
 
-1. Copy Vagrantfile and ansible folder to your "VirtualBox VMs" folder.
-2. Configure Vagrantfile or playbook if you like to.
+1. Copy Vagrantfile 
+2. Change the Repository URL to your own. You can fork this project or just use my Repo Url.
+3. If desired you can change the Ansible Configuration. Some things are already set as variables (/vars/all.yml) for easy change. 
 
 #### Start your VM
 
 ```shell
     $ vagrant up
 ```
-
-
-
-Information: This Repo is currently only configured for my own workspace. There is my Public-Key, my preferred configuration for zsh,vim,git etc and so on.
-You would need to change these to your parameteres if you would like to use it.
