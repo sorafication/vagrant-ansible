@@ -17,4 +17,4 @@ vagrant_packages:
 
 pathogen_plugins:
   - repo: "https://github.com/ajh17/VimCompletesMe.git"
-
+  - repo: "https://github.com/pearofducks/ansible-vim.git"
