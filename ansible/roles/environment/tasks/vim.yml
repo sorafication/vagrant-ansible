@@ -1,5 +1,6 @@
 ---
 - name: Install pathogen"
+  become_user: vagrant
   git:
     repo: "https://github.com/tpope/vim-pathogen"
     version: master
@@ -7,6 +8,7 @@
     dest: "{{ ansible_env.HOME }}/.vim"
 
 - name: "Infect .vimrc"
+  become_user: vagrant
   lineinfile:
     line: "execute pathogen#infect()"
     dest: "{{ ansible_env.HOME }}/.vimrc"
