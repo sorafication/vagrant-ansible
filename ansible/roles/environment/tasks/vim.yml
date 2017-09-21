@@ -1,23 +1,22 @@
 ---
 - name: Install pathogen"
-  become_user: vagrant
   git:
     repo: "https://github.com/tpope/vim-pathogen"
     version: master
     depth: 1
-    dest: "{{ ansible_env.HOME }}/.vim"
+    dest: "{{ vagrant_home }}/.vim"
 
 - name: "Infect .vimrc"
   become_user: vagrant
   lineinfile:
     line: "execute pathogen#infect()"
-    dest: "{{ ansible_env.HOME }}/.vimrc"
+    dest: "{{ vagrant_home }}/.vimrc"
 
 - name: "Install plugins"
   git:
     repo: "{{ item.repo }}"
     version: "{{ item.version | default('master') }}"
-    dest: "{{ ansible_env.HOME }}/.vim/bundle/{{ item.name | default(item.repo.split('/')[-1][:-4]) }}"
+    dest: "{{ vagrant_home }}/.vim/bundle/{{ item.name | default(item.repo.split('/')[-1][:-4]) }}"
     depth: 1
   with_items: "{{ pathogen_plugins }}"
 
