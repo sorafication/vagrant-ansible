@@ -13,3 +13,7 @@ vagrant_packages:
 - mc
 - rsync
 - zsh
+
+pathogen_plugins:
+  - repo: "https://github.com/ajh17/VimCompletesMe.git"
+
