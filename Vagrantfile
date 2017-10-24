@@ -1,5 +1,6 @@
 
-source_git_repository="github.com:wieczoreko/vagrant-ansible.git"
+source_git_ssh_repo="github.com:wieczoreko/vagrant-ansible.git"
+source_git_https_repo="https://github.com/wieczoreko/vagrant-ansible.git" 
 
 Vagrant.configure("2") do |config|
 
@@ -42,8 +43,8 @@ Vagrant.configure("2") do |config|
   	export PYTHONUNBUFFERED=1
 	
         # Download the Ansible Config files from your Repo
-        sudo su - vagrant -c 'git clone https://"#{source_git_repository}" /home/vagrant/vagrant-ansible'
-		sudo su - vagrant -c 'cd /home/vagrant/vagrant-ansible && git remote set-url origin git@"#{source_git_repository}"'
+        sudo su - vagrant -c 'git clone https://"#{source_git_https_repo}" /home/vagrant/vagrant-ansible'
+		sudo su - vagrant -c 'cd /home/vagrant/vagrant-ansible && git remote set-url origin git@"#{source_git_ssh_repo}"'
 		
   	# Run the actual playbook:
   	ansible-playbook /home/vagrant/vagrant-ansible/ansible/playbook.yml --skip-tags "UpdateGit"
