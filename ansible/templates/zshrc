@@ -22,7 +22,7 @@ alias deployall="ansible-playbook /home/vagrant/vagrant-ansible/ansible/playbook
 
 ## add local bin to path
 export PATH=~/bin:$PATH
-
+export PATH=~/.local/bin:$PATH
 ## export vim as editor
 export EDITOR=vim
 
